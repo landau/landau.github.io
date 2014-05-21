@@ -68,7 +68,7 @@ var app = React.createClass({
       name: 'json',
       onChange: this.onChange,
       value: this.state.json
-    })), dom.div({className: 'col-md-6'}, err ? err.message : JSON.stringify(comp, null, ' '))));
+    })), dom.div({className: 'col-md-6 output'}, dom.pre(null, err ? err.message : JSON.stringify(comp, null, ' ')))));
   }
 });
 React.renderComponent(app(null), document.getElementById('app'));
