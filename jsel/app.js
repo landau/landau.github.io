@@ -26,12 +26,16 @@ var defaultJSON = {
   drinkPreference: ['whiskey', 'beer', 'wine'],
   weight: 156
 };
+window.json = defaultJSON;
+window.jsel = jsel;
 var app = React.createClass({
   getInitialState: function() {
     return {
       json: JSON.stringify(defaultJSON, null, ' '),
       xpath: '//*',
-      method: 'selectAll'
+      method: 'selectAll',
+      output: jsel(defaultJSON).selectAll('//*'),
+      err: null
     };
   },
   onChange: function(e) {
@@ -39,25 +43,48 @@ var app = React.createClass({
     s[e.target.name] = e.target.value;
     this.setState(s);
   },
+  updateXPath: function(e) {
+    try {
+      var xpath = e.target.value;
+      this.setState({
+        xpath: xpath,
+        output: jsel(JSON.parse(this.state.json))[this.state.method](xpath),
+        err: null
+      });
+    } catch (err) {
+      this.setState({
+        xpath: e.target.value,
+        err: err
+      });
+    }
+  },
+  updateJSON: function(e) {
+    try {
+      var json = JSON.parse(e.target.value);
+      this.setState({
+        json: JSON.stringify(json, null, ' '),
+        output: jsel(json)[this.state.method](this.state.xpath),
+        err: null
+      });
+    } catch (err) {
+      this.setState({
+        json: e.target.value,
+        err: err
+      });
+    }
+  },
   format: function() {
     try {
-      this.setState({json: JSON.stringify(JSON.parse(this.state.json), null, ' ')});
-    } catch (e) {}
+      var json = JSON.parse(this.state.json);
+      this.setState({json: JSON.stringify(json, null, ' ')});
+    } catch (err) {
+      this.setState({err: err});
+    }
   },
   render: function() {
-    var err = null;
-    var parsed = null;
-    var output = null;
-    try {
-      parsed = JSON.parse(this.state.json);
-      output = jsel(parsed)[this.state.method](this.state.xpath);
-    } catch (e) {
-      err = e;
-    }
     return dom.div({className: 'container-fluid'}, dom.div({className: 'row'}, dom.div({className: 'col-md-12'}, dom.h2(null, 'jsel'), dom.div({className: 'form-group'}, dom.label({htmlFor: 'method'}, 'Method: '), dom.select({
       className: 'form-control',
       type: 'select',
-      placeholder: 'xpath',
       onChange: this.onChange,
       value: this.state.method,
       name: 'method'
@@ -65,7 +92,7 @@ var app = React.createClass({
       className: 'form-control',
       type: 'text',
       placeholder: 'xpath',
-      onChange: this.onChange,
+      onChange: this.updateXPath,
       value: this.state.xpath,
       name: 'xpath'
     })))), dom.div({className: 'row'}, dom.div({className: 'col-md-6'}, dom.button({
@@ -74,9 +101,9 @@ var app = React.createClass({
     }, 'Format'), dom.textarea({
       className: 'form-control',
       name: 'json',
-      onChange: this.onChange,
+      onChange: this.updateJSON,
       value: this.state.json
-    })), dom.div({className: 'col-md-6 output'}, dom.pre(null, err ? err.message : JSON.stringify(output, null, ' ')))));
+    })), dom.div({className: 'col-md-6 output'}, dom.pre(null, this.state.err ? this.state.err.message : JSON.stringify(this.state.output, null, ' ')))));
   }
 });
 React.renderComponent(app(null), document.getElementById('app'));
