@@ -43,6 +43,21 @@ var app = React.createClass({
     s[e.target.name] = e.target.value;
     this.setState(s);
   },
+  updateMethod: function(e) {
+    try {
+      var method = e.target.value;
+      this.setState({
+        method: method,
+        output: jsel(JSON.parse(this.state.json))[method](this.state.xpath),
+        err: null
+      });
+    } catch (err) {
+      this.setState({
+        method: e.target.value,
+        err: err
+      });
+    }
+  },
   updateXPath: function(e) {
     try {
       var xpath = e.target.value;
@@ -85,7 +100,7 @@ var app = React.createClass({
     return dom.div({className: 'container-fluid'}, dom.div({className: 'row'}, dom.div({className: 'col-md-12'}, dom.h2(null, 'jsel'), dom.div({className: 'form-group'}, dom.label({htmlFor: 'method'}, 'Method: '), dom.select({
       className: 'form-control',
       type: 'select',
-      onChange: this.onChange,
+      onChange: this.updateMethod,
       value: this.state.method,
       name: 'method'
     }, dom.option({value: 'selectAll'}, 'selectAll'), dom.option({value: 'select'}, 'select')), dom.br(), dom.input({
