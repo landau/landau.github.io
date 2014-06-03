@@ -60,7 +60,7 @@ var app = React.createClass({
   },
   updateXPath: function(e) {
     try {
-      var xpath = e.target.value;
+      var xpath = e.target.value.replace(/["']/g, '');
       this.setState({
         xpath: xpath,
         output: jsel(JSON.parse(this.state.json))[this.state.method](xpath),
