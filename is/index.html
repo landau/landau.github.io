@@ -108,7 +108,7 @@ a, small {
   .sidebar-offcanvas {
     right: -41.6%;
   }
-  
+
   .row-offcanvas-left
   .sidebar-offcanvas {
     left: -41.6%;
@@ -231,7 +231,7 @@ legible, and correct code.</p>
 <pre><code class="lang-js">  [&#39;venus&#39;, &#39;neptune&#39;, 1, []].filter(is.str); // [&#39;venus&#39;, &#39;neptune&#39;]
   [1.2, 3, 5].every(is.int) // false
 </code></pre>
-<p><code>is</code> also offers autocurrying for predicates of arity 2</p>
+<p>is also offers autocurrying for predicates of arity 2</p>
 <pre><code class="lang-js">var isInSet = is.contains([1, 2, 3]);
 isInSet(1); // true
 isInSet(5); // false
@@ -485,6 +485,10 @@ fn(is.fn); // false
 is.mod(6, 6); // 0
 </code></pre>
 </p></div></div><hr><a name="changelog"></a><div class="changelog"><h2 id="changelog">changelog</h2>
+<h4 id="0-8-1">0.8.1</h4>
+<ul>
+<li>Fix currying issue with <code>is.not</code></li>
+</ul>
 <h4 id="0-8-0">0.8.0</h4>
 <ul>
 <li>Added <code>is.curry</code> which is used internally</li>
@@ -559,7 +563,7 @@ is.mod(6, 6); // 0
   $('[data-toggle=offcanvas]').click(function() {
     $('.row-offcanvas').toggleClass('active');
   });
-  
+
   $('.btn-toggle').click(function() {
     $(this).find('.btn').toggleClass('active').toggleClass('btn-default').toggleClass('btn-primary');
   });
@@ -568,7 +572,4 @@ is.mod(6, 6); // 0
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ga('create', 'UA-36148349-8', 'landau.github.io');
-ga('send', 'pageview');
-
-
-</script></div></body></html>
+ga('send', 'pageview');</script></div></body></html>
