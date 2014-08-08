@@ -248,7 +248,7 @@ hasKey(&#39;myspace&#39;); // false
 You can report bugs and discuss features on the <a href="https://github.com/landau/is/issues">issues page</a>
 or send tweets to <a href="https://twitter.com/trevor_landau">@trevor_landau</a>.</p>
 <br><h5>Install/Downloads</h5><p>Node&nbsp;<a href="https://www.npmjs.org/package/is-predicate">npm install --save is-predicate</a></p><p>Development&nbsp;<a href="https://raw.githubusercontent.com/landau/is/master/dist/is.js">is.js</a></p><p>Production&nbsp;<a href="https://raw.githubusercontent.com/landau/is/master/dist/is.min.js">is.min.js</a></p></div><a name="predicates"></a><h1>Predicates</h1><hr><div class="panel panel-default"><a name="not"></a><div class="panel-heading"><h4>not<small><code>is.not</code></small></h4></div><div class="panel-body"><p>A complemented version of the <code>is</code> predicate functions.
-All predicate functions are available in this namespace</p>
+All predicate functions are available in this namespace.</p>
 <hr><p><small>Example</small><pre><code class="lang-js">is.null(null) // true
 is.not.null(null) // false
 </code></pre>
@@ -424,9 +424,9 @@ is.odd(0) // false
 is.contains(arr, 2) // true
 is.contains(arr, -5) // false
 </code></pre>
-</p></div></div><div class="panel panel-default"><a name="empty"></a><div class="panel-heading"><h4>empty<small><code>is.empty(o)</code></small></h4></div><div class="panel-body"><p>Returns true if <code>o</code> is an object and has no owned props
-Returns true if <code>o</code> is an array or string of length zero
-Throws <code>TypeError</code> if <code>o</code> is not an <code>Array</code>, <code>Object</code>, or <code>String</code></p>
+</p></div></div><div class="panel panel-default"><a name="empty"></a><div class="panel-heading"><h4>empty<small><code>is.empty(o)</code></small></h4></div><div class="panel-body"><p>Returns true if <code>o</code> is an object and has no owned props</p>
+<p>Returns true if <code>o</code> is an array or string of length zero</p>
+<p>Throws <code>TypeError</code> if <code>o</code> is not an <code>Array</code>, <code>Object</code>, or <code>String</code></p>
 <hr><p><small>Example</small><pre><code class="lang-js">is.empty([]) // true
 is.empty([&#39;a&#39;]) // false
 is.empty({}) // true
@@ -437,8 +437,7 @@ is.empty({foo: &#39;bar&#39;}) // false
 is.has(o, &#39;planet&#39;) // true
 is.has(o, &#39;moon&#39;) // false
 </code></pre>
-</p></div></div><div class="panel panel-default"><a name="instance"></a><div class="panel-heading"><h4>instance<small><code>is.instance(Cls, [inst])</code></small></h4></div><div class="panel-body"><p>Returns a <strong>predicate</strong> that evaluates <code>instanceof</code> against a given object.
-Returns true if <code>inst instanceof Cls</code> is <code>true</code>.</p>
+</p></div></div><div class="panel panel-default"><a name="instance"></a><div class="panel-heading"><h4>instance<small><code>is.instance(Cls, [inst])</code></small></h4></div><div class="panel-body"><p>Returns true if <code>inst instanceof Cls</code> is <code>true</code>.</p>
 <small>curryable </small><hr><p><small>Example</small><pre><code class="lang-js">function Planet() {}
 var p = new Planet();
 
